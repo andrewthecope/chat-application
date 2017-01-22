@@ -59,8 +59,11 @@ io.on('connection', function(socket){
                 
                 
                 var string = tone.sentences_tone[i].text;
-               var newstring = filter.clean(string);
-                console.log("Your Sentence \"" + newstring + '" was too angry. Try again.');
+
+               var newString = filter.clean(string);
+
+                io.emit('tooAngry', "Your Sentence \"" + newString + '" was too angry. Try again.')
+
               } 
             }
             

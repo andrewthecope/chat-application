@@ -43,6 +43,10 @@ socket.on('notifyUser', function(user){
   }
   setTimeout(function(){ $('#notifyUser').text(''); }, 10000);;
 });
+
+socket.on('tooAngry', function(string) {
+  console.log(string);
+});
  
 $(document).ready(function(){
   var name = makeid();
