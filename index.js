@@ -4,7 +4,12 @@ var io = require('socket.io')(http);
 var path = require('path');
 
 
+
 var watson = require('watson-developer-cloud');
+
+
+//thresholds
+var angerThreshold = 0.1;
 
 
 var ibmCreds = {
@@ -40,7 +45,26 @@ io.on('connection', function(socket){
         if (err)
           console.log(err);
         else {
-          console.log(JSON.stringify(tone, null, 2));
+          //tone
+          //console.log(JSON.stringify(tone, null, 2));
+          console.log(tone);
+          if (tone.sentences_tone) {
+            
+            for (var i = 0; i < tone.sentences_tone.length; i++) {
+              
+             var score = tone.sentences_tone[i].tone_categories[0].tones[0].score;
+             console.log("hate score:" + score);
+              if (score > angerThreshold) {
+                
+                
+                var string = tone.sentences_tone[i].text;
+                console.log("Your Sentence \"" + string + '" was too angry. Try again.');
+              } 
+            }
+            
+          }
+          
+          
           //io.emit('getTone', tone);
         }
         
