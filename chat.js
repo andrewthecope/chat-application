@@ -1,7 +1,9 @@
+
 var socket = io(); 
 function submitfunction(){
   var from = $('#user').val();
   var message = $('#m').val();
+  getTone(message);
   if(message != '') {
   socket.emit('chatMessage', from, message);
 }
@@ -12,6 +14,11 @@ $('#m').val('').focus();
 function notifyTyping() { 
   var user = $('#user').val();
   socket.emit('notifyUser', user);
+}
+
+function getTone(message) {
+  console.log("run tone");
+  socket.emit('getTone', message);
 }
  
 socket.on('chatMessage', function(from, msg){
