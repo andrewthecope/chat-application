@@ -29,7 +29,7 @@ var tone_analyzer = watson.tone_analyzer({
 app.get('/', function(req, res){
   var express=require('express');
   app.use(express.static(path.join(__dirname)));
-  res.sendFile(path.join(__dirname, '../chat-application', 'index.html'));
+  res.sendFile(path.join(__dirname, 'index.html'));
 });
  
 // Register events on socket connection
