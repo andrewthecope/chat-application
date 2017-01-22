@@ -56,19 +56,31 @@ var angryReplacements = [
 
 ];
     console.log(sentences);
-    var subtext= "<p>";
+    var subtext = "<p>";
+    var options = "";
     for (var i = 0; i < sentences.length; i++) {
-      if (sentences[i].tone_categories[0].tones[0].score > 0.1){
-        subtext += '<span class= "angry">' + sentences[i].text + '</span>';
-      }
-      else{
+      if (sentences[i].tone_categories[0].tones[0].score < 0.1){
         subtext += '<span class= "normal">' + sentences[i].text + '</span>';
       }
+
+      else{
+        subtext += '<span class= "angry">' + sentences[i].text + '</span>';
+        options += "<p>" + sentences[i].text + "</p>" + "<div> Try Replacing With: </div>";
+
+        for(var i = 0; i < angryReplacements.length; i++) {
+          options += "<div>" + angryReplacements[i] + "</div>";
+        }
+      }
+      
     }
+
     subtext+="</p>";
 
       console.log(subtext);
+
       $("#modal-body").append(subtext);
+      //$("#modal-body").append(options);
+      
 
       var headerText = document.getElementById('Header_Text');
       var modalText = document.getElementById('Quote');
