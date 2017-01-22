@@ -45,7 +45,7 @@ socket.on('notifyUser', function(user){
 });
 
 socket.on('tooAngry', function(string) {
-  console.log(string);
+  alert(string);
 });
  
 $(document).ready(function(){
