@@ -32,6 +32,13 @@ app.get('/', function(req, res){
   app.use(express.static(path.join(__dirname)));
   res.sendFile(path.join(__dirname, 'index.html'));
 });
+
+app.get('/test', function(req, res) {
+  
+  res.send("This is from the server!");
+  res.end("File is uploaded...");
+  
+});
  
 // Register events on socket connection
 io.on('connection', function(socket){ 

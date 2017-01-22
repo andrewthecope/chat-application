@@ -7,6 +7,18 @@
 body { 
   font: 13px Helvetica, Arial; 
 }
+
+.popup {
+  width:400px;
+  height:400px;
+  position:fixed;
+  top:50%;
+  left:50%;
+  top-margin:-200px;
+  left-margin:-200px;
+  background-color:white;
+}
+
 form { 
   background: #000; 
   padding: 3px; 
