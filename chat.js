@@ -44,27 +44,31 @@ socket.on('notifyUser', function(user){
   setTimeout(function(){ $('#notifyUser').text(''); }, 10000);;
 });
 
-socket.on('tooAngry', function(strings) {
+socket.on('tooAngry', function(msg, sentences) {
  
-  console.log('too Angry');
 
+  //console.log(tone);
+ 
 
 var angryReplacements = [
   "I don't understand",
   "I don't agree."
 
 ];
-
-
-    for (var i = 0; i < strings.length; i++) {
-      var newAngryBlock = "<p>" + strings[i] + "</p><p>Try Replacing With:</p>";
-
-      for (var j = 0; j < angryReplacements.length; j++) {
-        newAngryBlock += "<p>" + angryReplacements[j] + "</p>";
+    console.log(sentences);
+    var subtext= "<p>";
+    for (var i = 0; i < sentences.length; i++) {
+      if (sentences[i].tone_categories[0].tones[0].score > 0.1){
+        subtext += '<span class= "angry">' + sentences[i].text + '</span>';
       }
-
-      $('#modal-body').append(newAngryBlock);
+      else{
+        subtext += '<span class= "normal">' + sentences[i].text + '</span>';
+      }
     }
+    subtext+="</p>";
+
+      console.log(subtext);
+      $("#modal-body").append(subtext);
 
       var headerText = document.getElementById('Header_Text');
       var modalText = document.getElementById('Quote');
@@ -73,7 +77,7 @@ var angryReplacements = [
       modal.style.display = "block";
 
       headerText.textContent = "Your message was not very nice";
-      modalText.textContent = '"' + strings + '"';
+
       // Get the <span> element that closes the modal
       var span = document.getElementsByClassName("close")[0];
 

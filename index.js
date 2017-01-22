@@ -47,30 +47,13 @@ io.on('connection', function(socket){
           console.log(err);
         else {
           //tone
-          //console.log(JSON.stringify(tone, null, 2));
-          console.log(tone);
+          console.log(JSON.stringify(tone, null, 2));
+          //console.log(tone);
           if (tone.sentences_tone) {
-            var angryStrings = [];
-            
-            for (var i = 0; i < tone.sentences_tone.length; i++) {
-              
-             var score = tone.sentences_tone[i].tone_categories[0].tones[0].score;
-             console.log("hate score:" + score);
-              if (score > angerThreshold) {
-                
-                
-              var string = tone.sentences_tone[i].text;
 
-              var newString = filter.clean(string);
-
-              angryStrings.push(newString);             
-
-              } 
-            }
-            console.log('emitting too angry: ', angryStrings);
-            io.emit('tooAngry', angryStrings);
-            
-
+            console.log('emitting tone.sentences_tone', tone.sentences_tone);
+            io.emit('tooAngry', msg, tone.sentences_tone);
+          
             
           }
           
@@ -81,6 +64,7 @@ io.on('connection', function(socket){
     });
     
   });
+
   socket.on('BadWords', function(msg) {
       var cleanString = filter.clean(msg);
       console.log(cleanString);
