@@ -2,7 +2,8 @@ var app = require('express')();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var path = require('path');
-
+var Filter = require('bad-words');
+    filter = new Filter();
 
 
 var watson = require('watson-developer-cloud');
@@ -70,6 +71,10 @@ io.on('connection', function(socket){
         
     });
     
+  });
+  socket.on('BadWords', function(msg) {
+      var cleanString = filter.clean(msg);
+      console.log(cleanString);
   });
   
   socket.on('notifyUser', function(user){

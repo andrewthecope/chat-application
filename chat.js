@@ -4,6 +4,7 @@ function submitfunction(){
   var from = $('#user').val();
   var message = $('#m').val();
   getTone(message);
+  getWords(message);
   if(message != '') {
   socket.emit('chatMessage', from, message);
 }
@@ -19,6 +20,13 @@ function notifyTyping() {
 function getTone(message) {
   console.log("run tone");
   socket.emit('getTone', message);
+}
+
+function getWords(message)
+{
+    console.log("run words")
+    socket.emit('BadWords', message);
+    
 }
  
 socket.on('chatMessage', function(from, msg){
