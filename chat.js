@@ -44,8 +44,50 @@ socket.on('notifyUser', function(user){
   setTimeout(function(){ $('#notifyUser').text(''); }, 10000);;
 });
 
-socket.on('tooAngry', function(string) {
-  alert(string);
+socket.on('tooAngry', function(strings) {
+ 
+  console.log('too Angry');
+
+
+var angryReplacements = [
+  "I don't understand",
+  "I don't agree."
+
+];
+
+
+    for (var i = 0; i < strings.length; i++) {
+      var newAngryBlock = "<p>" + strings[i] + "</p><p>Try Replacing With:</p>";
+
+      for (var j = 0; j < angryReplacements.length; j++) {
+        newAngryBlock += "<p>" + angryReplacements[j] + "</p>";
+      }
+
+      $('#modal-body').append(newAngryBlock);
+    }
+
+      var headerText = document.getElementById('Header_Text');
+      var modalText = document.getElementById('Quote');
+      var modal = document.getElementById('myModal');
+
+      modal.style.display = "block";
+
+      headerText.textContent = "Your message was not very nice";
+      modalText.textContent = '"' + strings + '"';
+      // Get the <span> element that closes the modal
+      var span = document.getElementsByClassName("close")[0];
+
+      // When the user clicks on <span> (x), close the modal
+      span.onclick = function() {
+          modal.style.display = "none";
+      }
+
+      // When the user clicks anywhere outside of the modal, close it
+      window.onclick = function(event) {
+          if (event.target == modal) {
+              modal.style.display = "none";
+          }
+      }
 });
  
 $(document).ready(function(){

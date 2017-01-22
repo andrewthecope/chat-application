@@ -72,12 +72,6 @@ form #button {
 /* Modal Body */
 .modal-body {padding: 2px 16px;}
 
-/* Modal Footer */
-.modal-footer {
-    padding: 2px 16px;
-    background-color: #5cb85c;
-    color: white;
-}
 
 /* The Modal (background) */
 .modal {

@@ -50,6 +50,7 @@ io.on('connection', function(socket){
           //console.log(JSON.stringify(tone, null, 2));
           console.log(tone);
           if (tone.sentences_tone) {
+            var angryStrings = [];
             
             for (var i = 0; i < tone.sentences_tone.length; i++) {
               
@@ -58,14 +59,18 @@ io.on('connection', function(socket){
               if (score > angerThreshold) {
                 
                 
-                var string = tone.sentences_tone[i].text;
+              var string = tone.sentences_tone[i].text;
 
-               var newString = filter.clean(string);
+              var newString = filter.clean(string);
 
-                io.emit('tooAngry', "Your Sentence \"" + newString + '" was too angry. Try again.')
+              angryStrings.push(newString);             
 
               } 
             }
+            console.log('emitting too angry: ', angryStrings);
+            io.emit('tooAngry', angryStrings);
+            
+
             
           }
           
